@@ -179,6 +179,7 @@ const playGame = {
             else if (gameBoard.gameBoard[0][0] === choice && gameBoard.gameBoard[1][1] === choice && gameBoard.gameBoard[2][2] === choice || gameBoard.gameBoard[0][2] == choice && gameBoard.gameBoard[1][1] === choice && gameBoard.gameBoard[2][0] === choice) {
                 isThereAWinner = true
                 gameBoard.displayWin(name)
+                break
             }
         }
         let x = 0
