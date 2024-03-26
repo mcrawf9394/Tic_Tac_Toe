@@ -171,18 +171,16 @@ const playGame = {
             if (gameBoard.gameBoard[c][0] === choice && gameBoard.gameBoard[c][1] === choice && gameBoard.gameBoard[c][2] === choice){
                 isThereAWinner = true
                 gameBoard.displayWin(name)
-                break
             }
             else if (gameBoard.gameBoard[0][c] === choice && gameBoard.gameBoard[1][c] === choice && gameBoard.gameBoard[2][c] === choice){
                 isThereAWinner = true
                 gameBoard.displayWin(name)
-                break
             }
             else if (gameBoard.gameBoard[0][0] === choice && gameBoard.gameBoard[1][1] === choice && gameBoard.gameBoard[2][2] === choice || gameBoard.gameBoard[0][2] == choice && gameBoard.gameBoard[1][1] === choice && gameBoard.gameBoard[2][0] === choice) {
                 isThereAWinner = true
                 gameBoard.displayWin(name)
-                break
             }
+        }
         let x = 0
         for (i = 0; i < 3; i++) {
             for (j = 0; j < 3; j++) {
@@ -195,7 +193,6 @@ const playGame = {
         }
         if (x == 9) {
             gameBoard.displayTie()
-        }
         }
         return
     }
