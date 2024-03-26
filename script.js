@@ -53,6 +53,9 @@ const gameBoard = {
     },
     displayWin (name) {
         this.display.textContent = name + " has won"
+    },
+    displayTie () {
+        this.display.textContent = "It's a tie!"
     }
 }
 gameBoard.createGameBoard()
@@ -140,6 +143,19 @@ const playGame = {
                 gameBoard.displayWin(name)
                 break
             }
+        let x = 0
+        for (i = 0; i < 3; i++) {
+            for (j = 0; j < 3; j++) {
+                if (gameBoard.gameBoard[i][j] != " "){
+                    x++
+                }
+                else
+                return
+            }
+        }
+        if (x == 9) {
+            gameBoard.displayTie()
+        }
         }
         return
     }
