@@ -34,7 +34,6 @@ const gameBoard = {
         });
     },
     displayGameBoard (board) {
-        const gameBoardContainer = document.getElementById('gameBoardContainer')
         m = 0
         for (k = 0; k < 3; k++){
             for(l = 0; l < 3; l++){
@@ -53,9 +52,31 @@ const gameBoard = {
     },
     displayWin (name) {
         this.display.textContent = name + " has won"
+        this.displayReset()
     },
     displayTie () {
         this.display.textContent = "It's a tie!"
+        this.displayReset()
+    },
+    displayReset (){
+        const resetContainer = document.getElementById('resetButton')
+        const reset = document.createElement('button')
+        reset.textContent = "Reset"
+        reset.id = "reset"
+        reset.addEventListener('click', function (){
+            while (gameBoard.gameBoardContainer.firstChild){
+                gameBoard.gameBoardContainer.removeChild(gameBoard.gameBoardContainer.firstChild)
+            }
+            for (z = 0; z < 3; z++) {
+                for (a = 0; a < 3; a++){
+                    gameBoard.gameBoard[z][a] = " "
+                }
+            }
+            resetContainer.removeChild(reset)
+            gameBoard.displayGameBoard(gameBoard.gameBoard)
+            playGame.reset()
+        })
+        resetContainer.appendChild(reset)
     }
 }
 gameBoard.createGameBoard()
@@ -73,11 +94,30 @@ const playGame = {
     first: 0,
     second: 0,
     beginGame (){
-        players.player1.name = prompt("player1 name?")
-        players.player1.choice = prompt("player 1 choice")
-        players.player2.name = prompt("player 2 name")
-        players.player2.choice = prompt("player 2 choice")
-        gameBoard.displayTurn (players.player1.name)
+        let dialog1 = document.getElementById('player1')
+        let dialog2 = document.getElementById('player2')
+        dialog1.showModal()
+        let player1Submit = document.getElementById('player1Submit')
+        player1Submit.addEventListener('click', function (userEntry){
+            players.player1.name = document.getElementById('player1Name').value
+            players.player1.choice = document.getElementById('player1Choice').value
+            userEntry.preventDefault()
+            dialog1.close()
+            dialog2.showModal()
+        })
+        let player2Submit = document.getElementById('player2Submit')
+        player2Submit.addEventListener('click', function (userEntry) {
+            players.player2.name = document.getElementById('player2Name').value
+            players.player2.choice = document.getElementById('player2Choice').value
+            userEntry.preventDefault()
+            dialog2.close()
+            gameBoard.displayTurn (players.player1.name)
+        })
+    },
+    reset () {
+        this.first = 0
+        this.second = 0
+        gameBoard.displayTurn(players.player1.name)
     },
     turns (value) {
         let row

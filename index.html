@@ -8,10 +8,34 @@
         <title>Tic Tac Toe</title>
     </head>
     <body>
+        <dialog id="player1">
+            <form id="player1Inputs">
+                <label>Player 1 Name</label>
+                <input id="player1Name" required type="text">
+                <label>Player 1 Choice</label>
+                <input id="player1Choice" required type="text" maxlength="1">
+                <div>
+                <button class="submit" id="player1Submit" type="submit">Submit</button>
+                </div>
+            </form>
+        </dialog>
+        <dialog id="player2">
+            <form>
+                <label>Player 2 Name</label>
+                <input id="player2Name" required type="text" minlength="1" maxlength="1">
+                <label>Player 2 Choice</label>
+                <input id="player2Choice" required type="text" minlength="1" maxlength="1">
+                <div>
+                <button class="submit" id="player2Submit" type="submit">Submit</button>
+                </div>
+            </form>
+        </dialog>
         <h1>Tic-Tac-Toe</h1>
         <div id="gameBoardContainer">
 
         </div>
         <h2 id="display"></h2>
+        <h3>Image from <a href="https://unsplash.com/@pawel_czerwinski">Pawel Czerwinski</a> on <a href="https://unsplash.com/">Unsplash</a></h3>
+        <div id="resetButton"></div>
     </body>
 </html>
