@@ -5,8 +5,8 @@ html, body {
 #gameBoardContainer {
     display: grid;
     grid-template: repeat(3, 1fr) / repeat(3, 1fr);
-    height: 60%;
-    width: 60%;
+    min-height: 50%;
+    width: 50%;
 }
 .grids {
     min-height: 15rem;

@@ -1,6 +1,7 @@
 const gameBoard = {
     gameBoard: [],
     gameBoardContainer: document.getElementById('gameBoardContainer'),
+    display: document.getElementById('display'),
     createGameBoard() {
         for (i = 0; i < 3; i++) {
             this.gameBoard.push([])
@@ -46,6 +47,12 @@ const gameBoard = {
                 m++
             }
         }
+    },
+    displayTurn (name){
+        this.display.textContent = name + "'s turn"
+    },
+    displayWin (name) {
+        this.display.textContent = name + " has won"
     }
 }
 gameBoard.createGameBoard()
@@ -67,6 +74,7 @@ const playGame = {
         players.player1.choice = prompt("player 1 choice")
         players.player2.name = prompt("player 2 name")
         players.player2.choice = prompt("player 2 choice")
+        gameBoard.displayTurn (players.player1.name)
     },
     turns (value) {
         let row
@@ -94,37 +102,42 @@ const playGame = {
     },
     turnHandling (row, column, choice){
         let board = gameBoard.gameBoard
+        let name
         if (board[row][column] != " "){
             alert("You Cannot place a x or o on a spot that has already been marked!")
-            return
+
         } 
         else if (choice == players.player1.choice){
             this.first++
+            name = players.player1.name
+            gameBoard.displayTurn(players.player2.name)
             gameBoard.updateGameBoard(row, column, choice)
+            this.checkWinner(choice, name)
         }
         else {
             this.second++
+            name = players.player2.name
+            gameBoard.displayTurn(players.player1.name)
             gameBoard.updateGameBoard(row, column, choice)
+            this.checkWinner(choice, name)
         }
-        setTimeout(1000)
-        this.checkWinner(choice)
     },
-    checkWinner (choice) {
+    checkWinner (choice, name) {
         isThereAWinner = false
         for (c = 0; c < 3; c++){
             if (gameBoard.gameBoard[c][0] === choice && gameBoard.gameBoard[c][1] === choice && gameBoard.gameBoard[c][2] === choice){
-                console.log("there's a winner!")
                 isThereAWinner = true
+                gameBoard.displayWin(name)
                 break
             }
             else if (gameBoard.gameBoard[0][c] === choice && gameBoard.gameBoard[1][c] === choice && gameBoard.gameBoard[2][c] === choice){
-                console.log("there's a winner!")
                 isThereAWinner = true
+                gameBoard.displayWin(name)
                 break
             }
-            else if (gameBoard.gameBoard[0][0] === choice && gameBoard.gameBoard[1][1] === choice && gameBoard.gameBoard[2][2] === choice || gameBoard.gameBoard[0][2] == choice && gameBoard.gameBoard[1][1] === choice && gameBoard.gameBoard[2][0]) {
-                console.log("there's a winner!")
+            else if (gameBoard.gameBoard[0][0] === choice && gameBoard.gameBoard[1][1] === choice && gameBoard.gameBoard[2][2] === choice || gameBoard.gameBoard[0][2] == choice && gameBoard.gameBoard[1][1] === choice && gameBoard.gameBoard[2][0] === choice) {
                 isThereAWinner = true
+                gameBoard.displayWin(name)
                 break
             }
         }
